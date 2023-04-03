@@ -1,0 +1,22 @@
+.default-button {
+    background: 0;
+    outline: 0;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer
+
+    &_l {
+        padding: 6px 10px;
+        font-size: 16px;
+    }
+
+    &_m {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    &_primary {
+        background: $cl-primary;
+        color: white;
+    }
+}
