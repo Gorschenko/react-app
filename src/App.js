@@ -1,14 +1,25 @@
 import React from 'react'
 import DefaultButton from 'components/base/DefaultButton/DefaultButton.js'
 
-function App() {
-  return (
-    <div className="App">
-      <DefaultButton
-        title="Some title"
-      />
-    </div>
-  );
-}
+export default class App extends React.Component {
+  constructor () {
+    super();
+    this.constructor.displayName = 'App';
+    this.buttonAction = this.buttonAction.bind(this);
+  }
 
-export default App;
+  buttonAction (data) {
+    console.log(data);
+  }
+
+  render () {
+    return (
+      <div>
+        <DefaultButton
+          title="Some title"
+          action={this.buttonAction}
+        />
+      </div>
+    )
+  }
+};

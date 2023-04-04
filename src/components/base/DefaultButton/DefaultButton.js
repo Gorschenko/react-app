@@ -6,11 +6,14 @@ export default class DefaultButton extends React.Component {
 
     render() {
         return (
-            <button className={`
-                default-button
-                default-button_${this.props.size}
-                default-button_${this.props.color}
-            `}>
+            <button
+                className={`
+                    default-button
+                    default-button_${this.props.size}
+                    default-button_${this.props.color}
+                `}
+                onClick={this.props.action}
+            >
                 {this.props.title}
             </button>
         )
@@ -18,6 +21,7 @@ export default class DefaultButton extends React.Component {
 }
 
 DefaultButton.propTypes = {
+    action: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
     size: PropTypes.string,
     color: PropTypes.string,
