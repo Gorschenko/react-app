@@ -14,7 +14,7 @@ export default class SimpleInput extends React.Component {
                 {title}
                 <input
                     type={this.props.type}
-                    value={this.props.value}
+                    defaultValue={this.props.value}
                     onChange={this.props.onChange}
                 />
             </div>
@@ -25,6 +25,7 @@ export default class SimpleInput extends React.Component {
 SimpleInput.propTypes = {
     value: PropType.string.isRequired,
     onChange: PropType.func.isRequired,
+    title: PropType.string,
     type: PropType.string,
 }
 
