@@ -4,12 +4,11 @@ import DefaultButton from 'components/base/DefaultButton/DefaultButton.js'
 export default class App extends React.Component {
   constructor () {
     super();
-    this.constructor.displayName = 'App';
     this.buttonAction = this.buttonAction.bind(this);
   }
 
-  buttonAction (data) {
-    console.log(data);
+  buttonAction ($event) {
+    console.log($event);
   }
 
   render () {
