@@ -19,6 +19,7 @@ export default class DefaultButton extends React.Component {
         return (
             <button
                 className={buttonClasses}
+                disabled={this.props.isDisabled}
                 onClick={this.props.action}
             >
                 {icon}
@@ -37,6 +38,7 @@ DefaultButton.propTypes = {
     color: PropTypes.string,
     hasRightIcon: PropTypes.bool,
     hasPaddings: PropTypes.bool,
+    isDisabled: PropTypes.bool,
 }
 
 DefaultButton.defaultProps = {
