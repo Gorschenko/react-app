@@ -1,4 +1,6 @@
 .default-card {
+    @include flex-column;
+    gap: 8px;
     padding: 16px;
     box-shadow: $bs;
     border-radius: 4px;

@@ -1,9 +1,13 @@
 .app {
+    @include flex-column;
+    align-items: flex-start;
+    gap: 16px;
     max-width: 1200px;
     padding: 16px;
     margin: 0 auto;
 
     &__list {
+        @include parent-size;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 16px;

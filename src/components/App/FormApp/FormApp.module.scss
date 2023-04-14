@@ -1,0 +1,6 @@
+.formApp {
+    @include flex-column;
+    align-items: flex-start;
+    gap: 8px;
+
+}
