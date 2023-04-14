@@ -37,7 +37,7 @@ export default class App extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="app">
         <div className="app__list">
           {this.state.posts.map(p =>
             <DefaultCard
