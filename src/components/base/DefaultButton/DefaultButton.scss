@@ -1,9 +1,9 @@
 .default-button {
-    background: 0;
-    outline: 0;
-    border: 0;
+    @include default-button;
+    display: flex;
+    align-items: center;
+    gap: 4px;
     border-radius: 4px;
-    cursor: pointer;
 
     &_l {
         padding: 6px 10px;
@@ -18,5 +18,24 @@
     &_primary {
         background: $cl-primary;
         color: white;
+
+        &:hover {
+            scale: 1.05;
+            // filter: brightness(90%);
+        }
+    }
+    
+    &_rounded {
+        border-radius: 50%;
+    }
+
+    &_mirrored {
+        i {
+            order: 1;
+        }
+    }
+
+    &_resetted {
+        padding: 0px;
     }
 }

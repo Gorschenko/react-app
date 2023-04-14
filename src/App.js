@@ -16,6 +16,7 @@ export default class App extends React.Component {
       <div>
         <DefaultButton
           title="Some title"
+          icon="bx-user"
           action={this.buttonAction}
         />
       </div>

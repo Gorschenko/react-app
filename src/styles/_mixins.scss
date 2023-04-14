@@ -1,0 +1,12 @@
+@mixin default-button {
+    outline: 0;
+    border: 0;
+    background: 0;
+    transition: 0.5s;
+    cursor: pointer;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
