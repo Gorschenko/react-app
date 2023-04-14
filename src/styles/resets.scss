@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+  
+#root {
+    @include parent-size;
+}
+  
+body {
+    @include text_m;
+    font-family: 'Inter', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+  
+ul {
+    list-style: none;
+}
+  
+input {
+    border: 0;
+    outline: 0;
+    background: 0;
+}
+  
+button {
+    margin: 0;
+    padding: 0;
+    background: none;
+    outline: 0;
+    border: 0;
+}
+  
+image {
+    display: block;
+}
+  
+ a {
+    text-decoration: none;
+    cursor: pointer;
+}
+  
+p, h1, ul {
+    margin: 0;
+    padding: 0;
+}
+    
+::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+}
+  
+::-webkit-scrollbar-thumb {
+    background-color: $cl-primary;
+}

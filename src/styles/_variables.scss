@@ -1,1 +1,9 @@
-$cl-primary: rgb(66, 135, 245);
+$cl-primary: rgba(83, 192, 240, 1);
+$cl-danger: rgba(138, 20, 14, 1);
+$cl-secondary: rgba(224, 232, 240, 1);
+
+$t-weight-accent: 500;
+$t-weight-head: 700;
+
+$bs: 2px 2px 4px 2px $cl-secondary;
+$bs-hover: 4px 4px 12px 2px $cl-secondary;

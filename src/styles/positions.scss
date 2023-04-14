@@ -1,0 +1,35 @@
+.parent-size {
+    @include parent-size;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    @include flex-column;
+}
+
+.flex-row-centered {
+    @include flex-row-centered;
+}
+
+.flex-column-centered {
+    @include flex-column-centered;
+}
+
+.align-items {
+    &-center {
+        align-items: center;
+    }
+}
+
+.justify-content {
+    &-center {
+        justify-content: center;
+    }
+
+    &-space-between {
+        justify-content: space-between;
+    }
+}
