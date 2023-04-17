@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'; 
-import 'components/base/DefaultButton/DefaultButton.scss'
+import 'components/base/DefaultButton/DefaultButton.scss';
 
 export default class DefaultButton extends React.Component {
 

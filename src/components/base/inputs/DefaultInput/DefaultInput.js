@@ -2,15 +2,14 @@ import PropType from 'prop-types';
 import 'components/base/inputs/baseInputs.scss';
 
 const DefaultInput = (props) => {
-    const title = props.title
-        ? 
+    const title = props.title &&
         <label
             htmlFor={props.name}
             className="display-block"
         >
             {props.title}
         </label>
-        : null;
+
     
     const inputClasses = `
         default-input
@@ -19,9 +18,9 @@ const DefaultInput = (props) => {
         ${props.additionalClasses ? props.additionalClasses : ''}
     `;
 
-    const error = props.errors[props.name]
-        ? <p className="text_xs color_danger">{props.errors[props.name].message }</p>
-        : null;
+    const error = props.errors[props.name] &&
+        <p className="text_xs color_danger">{props.errors[props.name].message }</p>
+
     
     return (
         <div>

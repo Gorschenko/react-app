@@ -31,15 +31,13 @@ export default class SimpleInput extends React.Component {
     }
 
     render() {
-        const title = this.props.title
-            ?
+        const title = this.props.title &&
             <label
                 htmlFor={this.props.name}
                 className="display-block"
             >
                 {this.props.title}
             </label>
-            : null;
 
         const inputClasses = `
             default-input
