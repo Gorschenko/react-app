@@ -39,25 +39,37 @@ export default class App extends React.Component {
 
   render () {
     return (
-      <div className="app">
-        <FormApp />
-        <div className="app__list">
-          {this.state.posts.map(p =>
-            <DefaultCard
-              post={p}
-              key={p.title}
-            />
-          )}
-        </div>
-        <DefaultButton
-          title="Some title"
-          icon="bx-user"
-          isDisabled={this.state.isDisbledButton}
-          action={this.buttonAction}
-        />
+        <div className="app">
+            <FormApp /> 
 
-        <SimpleForm />
-      </div>
+            <SimpleForm />  
+
+            <div className="flex-column flex-gap-8">
+                <p className="text_l text_weight_head">
+                    Вывод обычного списка
+                </p>
+                <div className="app__list">
+                    {this.state.posts.map(p =>
+                        <DefaultCard
+                            post={p}
+                            key={p.title}
+                        />
+                    )}
+                </div> 
+            </div>
+
+            <div className="flex-column flex-gap-8">
+                <p className="text_l text_weight_head">
+                    Текст кнопки
+                </p>
+                <DefaultButton
+                  title="Some title"
+                  icon="bx-user"
+                  isDisabled={this.state.isDisbledButton}
+                  action={this.buttonAction}
+                />
+            </div>
+        </div>
     )
   }
 };

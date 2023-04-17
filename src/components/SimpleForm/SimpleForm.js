@@ -19,23 +19,31 @@ const SimpleForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <DefaultInput
-                title="Test filed"
-                name="test"
-                register={register}
-                errors={errors}
-                isInlined={true}
-                additionalClasses="flex-gap-16"
-            />
-            <DefaultInput
-                title="Email filed"
-                name="email"
-                register={register}
-                errors={errors}
-            />
-            <DefaultButton title="Submit" />
-        </form>
+        <div className="flex-column flex-gap-8">
+            <p className="text_l text_weight_head">
+                Форма с валидацией
+            </p>
+            <form
+                className="flex-column flex-gap-8"
+                onSubmit={handleSubmit(onSubmit)}
+            >
+                <DefaultInput
+                    title="Test filed"
+                    name="test"
+                    register={register}
+                    errors={errors}
+                    isInlined={true}
+                    additionalClasses="flex-gap-16"
+                />
+                <DefaultInput
+                    title="Email filed"
+                    name="email"
+                    register={register}
+                    errors={errors}
+                />
+                <DefaultButton title="Submit" />
+            </form>
+        </div>
     );
 }
 

@@ -18,7 +18,10 @@ export default class FormApp extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="flex-column flex-gap-8">
+                <p className="text_l text_weight_head">
+                    Обычная форма
+                </p>
                 <form className={classes.formApp}>
                     <SimpleInput
                         title="Название"
