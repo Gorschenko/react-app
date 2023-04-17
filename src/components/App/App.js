@@ -2,6 +2,7 @@ import React from 'react';
 import DefaultButton from 'components/base/DefaultButton/DefaultButton.js';
 import DefaultCard from 'components/base/DefaultCard/DefaultCard.js';
 import FormApp from 'components/App/FormApp/FormApp.js';
+import SimpleForm from 'components/SimpleForm/SimpleForm.js';
 import 'components/App/App.scss';
 
 export default class App extends React.Component {
@@ -54,6 +55,8 @@ export default class App extends React.Component {
           isDisabled={this.state.isDisbledButton}
           action={this.buttonAction}
         />
+
+        <SimpleForm />
       </div>
     )
   }

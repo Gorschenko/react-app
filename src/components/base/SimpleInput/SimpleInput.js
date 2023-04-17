@@ -35,7 +35,8 @@ export default class SimpleInput extends React.Component {
         const inputClasses = `
             simple-input
             simple-input_${this.props.size}
-        `
+        `;
+        
         return (
             <div className={inputClasses}>
                 {title}

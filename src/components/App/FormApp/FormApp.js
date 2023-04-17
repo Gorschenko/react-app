@@ -19,22 +19,24 @@ export default class FormApp extends React.Component {
     }
     render() {
         return (
-            <form className={classes.formApp}>
-                <SimpleInput
-                    title="Название"
-                    query={this.state.formData.title}
-                    onChange={newValue => this.setState({ formData: { ...this.state.formData, title: newValue } })}
-                />
-                <SimpleInput
-                    title="Описание"
-                    query={this.state.formData.description}
-                    onChange={newValue => this.setState({ formData: { ...this.state.formData, description: newValue } })}
-                />
-                <DefaultButton
-                  title="Создать"
-                  action={this.actions.submit}
-                />
-            </form>
+            <div>
+                <form className={classes.formApp}>
+                    <SimpleInput
+                        title="Название"
+                        query={this.state.formData.title}
+                        onChange={newValue => this.setState({ formData: { ...this.state.formData, title: newValue } })}
+                    />
+                    <SimpleInput
+                        title="Описание"
+                        query={this.state.formData.description}
+                        onChange={newValue => this.setState({ formData: { ...this.state.formData, description: newValue } })}
+                    />
+                    <DefaultButton
+                      title="Создать"
+                      action={this.actions.submit}
+                    />
+                </form>
+            </div>
         )
     }
 
