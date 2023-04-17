@@ -3,6 +3,33 @@ import PropType from 'prop-types';
 import 'components/base/SimpleInput/SimpleInput.scss';
 
 export default class SimpleInput extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            query: '',
+        };
+        this.actions = {
+            onChange: this.onChange.bind(this)
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.query !== this.state.query) {
+            this.setState({ query: this.props.query });
+        };
+    }
+    
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.query !== this.state.query) {
+            this.setState({ query: this.props.query });
+        };
+    }
+
+    onChange ($event) {
+        this.setState({ query: $event.target.value });
+        this.props.onChange($event.target.value);
+    }
+
     render() {
         const title = this.props.title ? <p>{this.props.title}</p> : null;
         const inputClasses = `
@@ -14,8 +41,8 @@ export default class SimpleInput extends React.Component {
                 {title}
                 <input
                     type={this.props.type}
-                    defaultValue={this.props.value}
-                    onChange={this.props.onChange}
+                    value={this.state.query}
+                    onChange={this.actions.onChange}
                 />
             </div>
         )
@@ -23,7 +50,7 @@ export default class SimpleInput extends React.Component {
 }
 
 SimpleInput.propTypes = {
-    value: PropType.string.isRequired,
+    query: PropType.string.isRequired,
     onChange: PropType.func.isRequired,
     title: PropType.string,
     type: PropType.string,

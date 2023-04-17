@@ -13,21 +13,34 @@ export default class FormApp extends React.Component {
                 description: '',
             },
         };
+        this.actions = {
+            submit: this.submit.bind(this),
+        };
     }
     render() {
         return (
             <form className={classes.formApp}>
                 <SimpleInput
                     title="Название"
-                    value={this.state.formData.title}
-                    onChange={e => this.setState({ formData: { ...this.state.formData, title: e.target.value } })}
+                    query={this.state.formData.title}
+                    onChange={newValue => this.setState({ formData: { ...this.state.formData, title: newValue } })}
                 />
                 <SimpleInput
                     title="Описание"
-                    value={this.state.formData.description}
-                    onChange={e => this.setState({ formData: { ...this.state.formData, description: e.target.value } })}
+                    query={this.state.formData.description}
+                    onChange={newValue => this.setState({ formData: { ...this.state.formData, description: newValue } })}
+                />
+                <DefaultButton
+                  title="Создать"
+                  action={this.actions.submit}
                 />
             </form>
         )
+    }
+
+    submit($event) {
+        $event.preventDefault();
+        console.log(this.state.formData);
+        this.setState({ formData: { title: '', description: '' } });
     }
 }
