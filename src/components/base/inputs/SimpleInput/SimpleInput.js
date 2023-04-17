@@ -1,6 +1,6 @@
 import React from 'react';
 import PropType from 'prop-types';
-import 'components/base/SimpleInput/SimpleInput.scss';
+import 'components/base/inputs/baseInputs.scss';
 
 export default class SimpleInput extends React.Component {
     constructor() {
@@ -31,16 +31,28 @@ export default class SimpleInput extends React.Component {
     }
 
     render() {
-        const title = this.props.title ? <p>{this.props.title}</p> : null;
+        const title = this.props.title
+            ?
+            <label
+                htmlFor={this.props.name}
+                className="display-block"
+            >
+                {this.props.title}
+            </label>
+            : null;
+
         const inputClasses = `
-            simple-input
-            simple-input_${this.props.size}
+            default-input
+            default-input_${this.props.isInlined ? 'inlined' : 'blocked'}
+            default-input_${this.props.size}
+            ${this.props.additionalClasses ? this.props.additionalClasses : ''}
         `;
         
         return (
             <div className={inputClasses}>
                 {title}
                 <input
+                    id={this.props.name}
                     type={this.props.type}
                     value={this.state.query}
                     onChange={this.actions.onChange}
@@ -53,11 +65,15 @@ export default class SimpleInput extends React.Component {
 SimpleInput.propTypes = {
     query: PropType.string.isRequired,
     onChange: PropType.func.isRequired,
+    name: PropType.string.isRequired,
     title: PropType.string,
     type: PropType.string,
+    isInlined: PropType.bool,
+    additionalClasses: PropType.string,
 }
 
 SimpleInput.defaultProps = {
     type: 'text',
+    isInlined: false,
     size: 'l',
 }

@@ -1,8 +1,15 @@
 .default-input {
-    @include flex-column;
-    gap: 4px;
+
+    &_inlined {
+        display: flex;
+        align-items: center;
+    }
+
+    &_blocked {
+        @include flex-column;
+    }
     
-    p {
+    label {
         @include text_s;
     }
 

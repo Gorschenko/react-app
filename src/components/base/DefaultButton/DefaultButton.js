@@ -30,7 +30,7 @@ export default class DefaultButton extends React.Component {
 }
 
 DefaultButton.propTypes = {
-    action: PropTypes.func.isRequired,
+    action: PropTypes.func,
     title: PropTypes.string,
     icon: PropTypes.string,
     size: PropTypes.string,

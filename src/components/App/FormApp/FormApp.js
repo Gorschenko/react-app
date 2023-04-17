@@ -1,7 +1,6 @@
 import React from 'react';
-// import PropType from 'prop-types';
 import classes from 'components/App/FormApp/FormApp.module.scss';
-import SimpleInput from 'components/base/SimpleInput/SimpleInput.js';
+import SimpleInput from 'components/base/inputs/SimpleInput/SimpleInput.js';
 import DefaultButton from 'components/base/DefaultButton/DefaultButton.js';
 
 export default class FormApp extends React.Component {
@@ -23,11 +22,13 @@ export default class FormApp extends React.Component {
                 <form className={classes.formApp}>
                     <SimpleInput
                         title="Название"
+                        name="name"
                         query={this.state.formData.title}
                         onChange={newValue => this.setState({ formData: { ...this.state.formData, title: newValue } })}
                     />
                     <SimpleInput
                         title="Описание"
+                        name="description"
                         query={this.state.formData.description}
                         onChange={newValue => this.setState({ formData: { ...this.state.formData, description: newValue } })}
                     />
