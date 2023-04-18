@@ -88,10 +88,7 @@ export default class App extends React.Component {
                     show={this.state.modals.default}
                     onClose={this.toggleModal}
                 >
-                    <DefaultButton
-                      title="Close modal"
-  
-                    /> 
+                  Hello
                 </DefaultModal>
             </div>
         </div>

@@ -7,14 +7,15 @@ export default class DefaultButton extends React.Component {
     render() {
         const title = this.props.title ? <span>{this.props.title}</span> : null;
         const icon = this.props.icon ? <i className={`bx ${this.props.icon}`} /> : null;
-        const buttonClasses = `
-            default-button
-            default-button_${this.props.size}
-            default-button_${this.props.color}
-            ${this.props.form ? 'default-button_' + this.props.form : ''}
-            ${this.props.hasRightIcon ? 'default-button_mirrored' : ''}
-            ${this.props.withoutPaddings ? 'default-button_resetted' : ''}
-        `;
+        const buttonClasses = [
+            'default-button',
+            `default-button_${this.props.form}_${this.props.size}`,
+            `default-button_${this.props.color}`,
+            `default-button_${this.props.form}`,
+            `${this.props.hasRightIcon ? 'default-button_mirrored' : ''}`,
+            `${this.props.withoutPaddings ? 'default-button_resetted' : ''}`,
+            `${this.props.className ? this.props.className : ''}`,
+        ].join(' ');
 
         return (
             <button
@@ -44,4 +45,5 @@ DefaultButton.propTypes = {
 DefaultButton.defaultProps = {
     size: 'l',
     color: 'primary',
+    form: 'rectangular',
 }

@@ -5,28 +5,45 @@
     gap: 4px;
     border-radius: 4px;
 
-    &_l {
-        padding: 6px 10px;
-        @include text_m;
-    }
-
-    &_m {
-        padding: 4px 8px;
-        @include text_xs; 
-    }
-
     &_primary {
         background: $cl-primary;
         color: white;
 
         &:hover {
-            scale: 1.05;
-            // filter: brightness(90%);
+            filter: brightness(90%);
         }
     }
     
     &_rounded {
         border-radius: 50%;
+
+        &_l {
+            padding: 4px;
+
+            i {
+                font-size: 24px;
+            }
+        }
+    
+        &_m {
+            padding: 4px;
+
+            i {
+                font-size: 16px;
+            }
+        }
+    }
+
+    &_rectangular {
+        &_l {
+            padding: 6px 10px;
+            @include text_m;
+        }
+    
+        &_m {
+            padding: 4px 8px;
+            @include text_xs; 
+        }
     }
 
     &_mirrored {
