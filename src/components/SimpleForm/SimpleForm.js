@@ -3,11 +3,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import DefaultInput from 'components/base/inputs/DefaultInput/DefaultInput.js';
 import DefaultButton from 'components/base/DefaultButton/DefaultButton.js';
+import DefaultSelect from 'components/base/DefaultSelect/DefaultSelect.js';
 
 const SimpleForm = () => {
     const schema = yup.object({
         test: yup.string().required(),
         email: yup.string().email().required(),
+        city: yup.string().required(),
     }).required();
 
     const { register, handleSubmit, formState:{ errors }, reset } = useForm(
@@ -38,6 +40,13 @@ const SimpleForm = () => {
                 <DefaultInput
                     title="Email filed"
                     name="email"
+                    register={register}
+                    errors={errors}
+                />
+                <DefaultSelect
+                    title="Select"
+                    name="city"
+                    placeholder="Выберите город"
                     register={register}
                     errors={errors}
                 />

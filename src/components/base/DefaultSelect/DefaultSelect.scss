@@ -1,0 +1,73 @@
+.default-select {
+
+    &_inlined {
+        display: flex;
+        align-items: center;
+    }
+
+    &_blocked {
+        @include flex-column;
+    }
+    
+    &__field {
+        display: flex;
+        align-items: center;
+        border: 1px solid $cl-primary;
+        border-radius: 4px;
+    }
+
+    &__inner {
+        position: relative;
+    }
+
+    &__list {
+        overflow-y: scroll;
+        position: absolute;
+        width: 100%;
+        height: 200px;
+        border-radius: 4px;
+        background: white;
+        box-shadow: $bs;
+
+        &_active {
+            display: block;
+        }
+
+        &_inactive {
+            display: none;
+        }
+
+        &-item {
+            cursor: pointer;
+            transition: $tr;
+
+            &:hover {
+                background: $cl-secondary;
+            }
+        }
+    }
+
+    &_l {
+        .default-select__field,
+        .default-select__list-item {
+            padding: 6px 10px;
+        }
+
+        input,
+        .default-select__list-item {
+            @include text_m;
+        }
+    }
+
+    &_m {
+        .default-select__field,
+        .default-select__list-item {
+            padding: 4px 8px;
+        }
+
+        input,
+        .default-select__list-item {
+            @include text_xs;
+        }
+    }
+}
