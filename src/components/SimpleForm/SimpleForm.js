@@ -4,17 +4,54 @@ import * as yup from "yup";
 import DefaultInput from 'components/base/inputs/DefaultInput/DefaultInput.js';
 import DefaultButton from 'components/base/DefaultButton/DefaultButton.js';
 import DefaultSelect from 'components/base/DefaultSelect/DefaultSelect.js';
+import React, { useState } from 'react';
 
 const SimpleForm = () => {
+    const [posts, setPosts] = useState([
+        {
+         title: 'Some title 1',
+         description: 'Some description. Some description. Some description. Some description.',
+        },
+        {
+            title: 'Some title 2',
+            description: 'Some description.',
+        },
+        {
+            title: 'Some title 3',
+            description: 'Text Text Text Text ',
+        },
+        {
+            title: 'Some title 4',
+            description: 'Test Test Test Test ',
+        },
+        {
+            title: 'Some title 5',
+            description: 'Only description. Only description.',
+        },
+        {
+            title: 'Some title 123',
+            description: '123',
+        },
+        {
+            title: '22222',
+            description: '22 222 333',
+        },
+        {
+            title: 'авывавваывавы',
+            description: 'ываыв вааввыа аввы',
+        },
+    ]);
+
     const schema = yup.object({
         test: yup.string().required(),
         email: yup.string().email().required(),
         city: yup.string().required(),
     }).required();
 
-    const { register, handleSubmit, formState:{ errors }, reset } = useForm(
+    const { register, handleSubmit, formState: { errors }, reset } = useForm(
         { resolver: yupResolver(schema) }
     );
+
     const onSubmit = data => {
         console.log(data);
         reset();
@@ -47,6 +84,8 @@ const SimpleForm = () => {
                     title="Select"
                     name="city"
                     placeholder="Выберите город"
+                    items={posts}
+                    schema="description"
                     register={register}
                     errors={errors}
                 />

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 const DefaultSelect = (props) => {
     const [show, setShow] = useState(false);
+    const [query, setQuery] = useState('');
 
     const selectClasses = [
         'default-select',
@@ -37,6 +38,24 @@ const DefaultSelect = (props) => {
         setShow(!show);
     };
 
+    const selectItem = (item) => {
+        setQuery(item[props.schema]);
+    };
+
+    const items = props.items.length
+        ?   props.items.map(i =>
+                <li
+                    className="default-select__list-item"
+                    key={i[props.schema]}
+                    onClick={e => selectItem(i)}
+                >
+                    {i[props.schema]}
+                </li>
+            )
+        :   <li className="default-select__list-item">
+                Информация отсутствует
+            </li>;
+
     return (
         <div>
             <div className={selectClasses}>
@@ -44,39 +63,19 @@ const DefaultSelect = (props) => {
                 <div className="default-select__inner">
                     <div className="default-select__field">
                         <input
-                            className="flex-1"
+                            className="flex-1 cursor-pointer"
                             id={props.name}
+                            name={props.name}
                             readOnly
-                            type={props.type}
                             placeholder={props.placeholder}
+                            value={query}
                             { ...props.register(props.name) }
-                            onFocus={toggleList}
-                            onBlur={toggleList}
+                            onClick={toggleList}
                         />
                         <i className={iconClasses} />
                     </div>
                     <ul className={listClasses}>
-                        <li className="default-select__list-item">
-                            Item 1 Item 1 Item 1 Item 1 Item 1 Item 1 Item 1 
-                        </li>
-                        <li className="default-select__list-item">
-                            Item 1
-                        </li>
-                        <li className="default-select__list-item">
-                            Item 1
-                        </li>
-                        <li className="default-select__list-item">
-                            Item 1
-                        </li>
-                        <li className="default-select__list-item">
-                            Item 1
-                        </li>
-                        <li className="default-select__list-item">
-                            Item 1
-                        </li>
-                        <li className="default-select__list-item">
-                            Item 1
-                        </li>
+                        {items}
                     </ul>
                 </div>
             </div>
@@ -88,16 +87,16 @@ const DefaultSelect = (props) => {
 DefaultSelect.propTypes = {
     errors: PropType.object.isRequired,
     register: PropType.func.isRequired,
+    items: PropType.array.isRequired,
+    schema: PropType.string.isRequired,
     name: PropType.string.isRequired,
     title: PropType.string,
-    type: PropType.string,
     placeholder: PropType.string,
     isInlined: PropType.bool,
     additionalClasses: PropType.string,
 }
 
 DefaultSelect.defaultProps = {
-    type: 'text',
     isInlined: false,
     size: 'l',
 }

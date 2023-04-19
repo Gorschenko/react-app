@@ -28,6 +28,7 @@ const DefaultInput = (props) => {
                 {title}
                 <input
                     id={props.name}
+                    name={props.name}
                     type={props.type}
                     { ...props.register(props.name) }
                 />

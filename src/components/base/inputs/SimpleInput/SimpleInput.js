@@ -51,6 +51,7 @@ export default class SimpleInput extends React.Component {
                 {title}
                 <input
                     id={this.props.name}
+                    name={this.props.name}
                     type={this.props.type}
                     value={this.state.query}
                     onChange={this.actions.onChange}
