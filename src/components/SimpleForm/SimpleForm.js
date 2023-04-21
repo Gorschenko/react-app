@@ -55,11 +55,16 @@ const SimpleForm = () => {
 
     const onSubmit = data => {
         console.log(data);
+        const newPost = {
+            title: data.test,
+            description: data.email,
+        }
+        setPosts([...posts, newPost]);
         reset();
     };
 
     const selectDropdown = (data) => {
-        console.log(data)
+        console.log(data);
     }
     return (
         <div className="flex-column flex-gap-8">
