@@ -1,12 +1,6 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-} from 'react-router-dom';
-import MainPage from 'pages/MainPage';
-import SecondPage from 'pages/SecondPage';
-
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import MainPage from "pages/MainPage";
+import FastCompanyPage from "pages/FastCompanyPage";
 
 const App = () => {
   return (
@@ -17,11 +11,11 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route path="/" element={ <MainPage /> } />
-        <Route path="/second" element={ <SecondPage /> } />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/second" element={<FastCompanyPage />} />
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
-export default App; 
+export default App;
