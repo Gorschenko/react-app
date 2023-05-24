@@ -1,9 +1,7 @@
+import Counter from "components/counter";
+
 const SecondPage = () => {
-    return (
-        <div>
-            Работает
-        </div>
-    )
-}
+  return <Counter />;
+};
 
 export default SecondPage;
