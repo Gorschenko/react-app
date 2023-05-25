@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import User from "components/user";
 import SearchStatus from "components/searchStatus";
 import Pagination from "components/pagination";
@@ -8,13 +8,24 @@ import GroupList from "components/groupList";
 
 const Users = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
-  const count = users.length;
+  const [professions, setProfession] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedProf, setSelectedProf] = useState();
+
+  const count = users.length;
   const pageSize = 4;
+
+  useEffect(() => {
+    api.professions.fetchAll().then((professions) =>
+      setProfession({
+        ...professions,
+        allProfession: { name: "Все профессии" },
+      })
+    );
+  }, []);
 
   const handlePageChange = (pageIndex) => {
     setCurrentPage(pageIndex);
-    console.log("page: ", pageIndex);
   };
 
   const getTableHeader = () => {
@@ -48,12 +59,36 @@ const Users = () => {
     );
   };
 
-  const userCrop = paginate(users, currentPage, pageSize);
-  console.log(userCrop);
+  const filteredUsers =
+    selectedProf && selectedProf._id
+      ? users.filter((u) => u.profession === selectedProf)
+      : users;
+
+  const userCrop = paginate(filteredUsers, currentPage, pageSize);
+
+  const handleProffesionSelect = (item) => {
+    setSelectedProf(item);
+    console.log(item);
+  };
+
+  const clearFilter = () => {
+    setSelectedProf();
+  };
 
   return (
     <div>
-      <GroupList />
+      {professions && (
+        <>
+          <GroupList
+            items={professions}
+            onItemSelect={handleProffesionSelect}
+            selectedItem={selectedProf}
+          />
+          <button className="btn btn-secondary mt-2" onClick={clearFilter}>
+            Сбросить фильтры
+          </button>
+        </>
+      )}
       <SearchStatus usersLength={count} />
       {count !== 0 && (
         <table className="table">
