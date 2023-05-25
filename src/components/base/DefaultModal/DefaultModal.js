@@ -31,7 +31,7 @@ const DefaultModal = ({ children, ...props }) => {
 };
 
 DefaultModal.propTypes = {
-    show: PropType.bool.isRequired,
+    show: PropType.bool.isRequired
 };
 
 export default DefaultModal;

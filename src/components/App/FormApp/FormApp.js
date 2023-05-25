@@ -9,11 +9,11 @@ export default class FormApp extends React.Component {
         this.state = {
             formData: {
                 title: "",
-                description: "",
-            },
+                description: ""
+            }
         };
         this.actions = {
-            submit: this.submit.bind(this),
+            submit: this.submit.bind(this)
         };
     }
     render() {
@@ -29,8 +29,8 @@ export default class FormApp extends React.Component {
                             this.setState({
                                 formData: {
                                     ...this.state.formData,
-                                    title: newValue,
-                                },
+                                    title: newValue
+                                }
                             })
                         }
                     />
@@ -42,8 +42,8 @@ export default class FormApp extends React.Component {
                             this.setState({
                                 formData: {
                                     ...this.state.formData,
-                                    description: newValue,
-                                },
+                                    description: newValue
+                                }
                             })
                         }
                     />

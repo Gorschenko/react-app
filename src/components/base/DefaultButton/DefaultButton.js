@@ -15,7 +15,7 @@ export default class DefaultButton extends React.Component {
             `default-button_${this.props.form}`,
             `${this.props.hasRightIcon ? "default-button_mirrored" : ""}`,
             `${this.props.withoutPaddings ? "default-button_resetted" : ""}`,
-            `${this.props.className ? this.props.className : ""}`,
+            `${this.props.className ? this.props.className : ""}`
         ].join(" ");
 
         return (
@@ -40,11 +40,11 @@ DefaultButton.propTypes = {
     color: PropTypes.string,
     hasRightIcon: PropTypes.bool,
     hasPaddings: PropTypes.bool,
-    isDisabled: PropTypes.bool,
+    isDisabled: PropTypes.bool
 };
 
 DefaultButton.defaultProps = {
     size: "l",
     color: "primary",
-    form: "rectangular",
+    form: "rectangular"
 };

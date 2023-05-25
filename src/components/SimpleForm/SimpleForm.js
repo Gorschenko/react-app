@@ -12,43 +12,43 @@ const SimpleForm = () => {
         {
             title: "Some title 1",
             description:
-                "Some description. Some description. Some description. Some description.",
+                "Some description. Some description. Some description. Some description."
         },
         {
             title: "Some title 2",
-            description: "Some description.",
+            description: "Some description."
         },
         {
             title: "Some title 3",
-            description: "Text Text Text Text ",
+            description: "Text Text Text Text "
         },
         {
             title: "Some title 4",
-            description: "Test Test Test Test ",
+            description: "Test Test Test Test "
         },
         {
             title: "Some title 5",
-            description: "Only description. Only description.",
+            description: "Only description. Only description."
         },
         {
             title: "Some title 123",
-            description: "123",
+            description: "123"
         },
         {
             title: "22222",
-            description: "22 222 333",
+            description: "22 222 333"
         },
         {
             title: "авывавваывавы",
-            description: "ываыв вааввыа аввы",
-        },
+            description: "ываыв вааввыа аввы"
+        }
     ]);
 
     const schema = yup
         .object({
             test: yup.string().required(),
             email: yup.string().email().required(),
-            city: yup.string().required(),
+            city: yup.string().required()
         })
         .required();
 
@@ -56,14 +56,14 @@ const SimpleForm = () => {
         register,
         handleSubmit,
         formState: { errors },
-        reset,
+        reset
     } = useForm({ resolver: yupResolver(schema) });
 
     const onSubmit = (data) => {
         console.log(data);
         const newPost = {
             title: data.test,
-            description: data.email,
+            description: data.email
         };
         setPosts([...posts, newPost]);
         reset();

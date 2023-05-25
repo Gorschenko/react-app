@@ -6,10 +6,10 @@ export default class SimpleInput extends React.Component {
     constructor() {
         super();
         this.state = {
-            query: "",
+            query: ""
         };
         this.actions = {
-            onChange: this.onChange.bind(this),
+            onChange: this.onChange.bind(this)
         };
     }
 
@@ -66,11 +66,11 @@ SimpleInput.propTypes = {
     title: PropType.string,
     type: PropType.string,
     isInlined: PropType.bool,
-    additionalClasses: PropType.string,
+    additionalClasses: PropType.string
 };
 
 SimpleInput.defaultProps = {
     type: "text",
     isInlined: false,
-    size: "l",
+    size: "l"
 };

@@ -10,14 +10,14 @@ const DefaultSelect = (props) => {
         "default-select",
         `default-select_${props.isInlined ? "inlined" : "blocked"}`,
         `default-select_${props.size}`,
-        `${props.additionalClasses ? props.additionalClasses : ""}`,
+        `${props.additionalClasses ? props.additionalClasses : ""}`
     ].join(" ");
 
     const iconClasses = ["bx", `bx-chevron-${show ? "up" : "down"}`].join(" ");
 
     const listClasses = [
         "default-select__list",
-        `default-select__list_${show ? "active" : "inactive"}`,
+        `default-select__list_${show ? "active" : "inactive"}`
     ].join(" ");
 
     const error = props.errors[props.name] && (
@@ -89,12 +89,12 @@ DefaultSelect.propTypes = {
     title: PropType.string,
     placeholder: PropType.string,
     isInlined: PropType.bool,
-    additionalClasses: PropType.string,
+    additionalClasses: PropType.string
 };
 
 DefaultSelect.defaultProps = {
     isInlined: false,
-    size: "l",
+    size: "l"
 };
 
 export default DefaultSelect;

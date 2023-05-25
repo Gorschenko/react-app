@@ -5,11 +5,11 @@ import { setLocale } from "yup";
 import "bootstrap/dist/css/bootstrap.css";
 setLocale({
     mixed: {
-        required: "Поле является обязательным",
+        required: "Поле является обязательным"
     },
     string: {
-        email: "Введите валидный адресс электронной почты",
-    },
+        email: "Введите валидный адресс электронной почты"
+    }
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

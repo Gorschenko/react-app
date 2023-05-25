@@ -11,25 +11,25 @@ export default class MainPage extends React.Component {
         super();
         this.state = {
             modals: {
-                default: false,
+                default: false
             },
             isDisbledButton: false,
             posts: [
                 {
                     title: "Some title 1",
                     description:
-                        "Some description. Some description. Some description. Some description.",
+                        "Some description. Some description. Some description. Some description."
                 },
                 {
                     title: "Some title 2",
-                    description: "Some description.",
+                    description: "Some description."
                 },
                 {
                     title: "Some title 3",
                     description:
-                        "Some description.  Some description. Some description.",
-                },
-            ],
+                        "Some description.  Some description. Some description."
+                }
+            ]
         };
         this.toggleModal = this.toggleModal.bind(this);
         this.buttonAction = this.buttonAction.bind(this);
@@ -37,7 +37,7 @@ export default class MainPage extends React.Component {
 
     buttonAction($event) {
         this.setState({
-            isDisbledButton: true,
+            isDisbledButton: true
         });
         setTimeout(() => {
             this.setState({ isDisbledButton: false });

@@ -7,7 +7,7 @@ const CounterList = () => {
         { id: 2, value: 4, name: "Ложка" },
         { id: 3, value: 0, name: "Вилка" },
         { id: 4, value: 0, name: "Тарелка" },
-        { id: 5, value: 0, name: "Набор минималиста" },
+        { id: 5, value: 0, name: "Набор минималиста" }
     ];
 
     const [counters, setCounters] = useState(initialState);

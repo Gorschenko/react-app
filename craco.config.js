@@ -4,8 +4,8 @@ module.exports = {
             loaderOptions: {
                 additionalData: `
             @import "src/styles/main.scss";
-          `,
-            },
-        },
-    },
+          `
+            }
+        }
+    }
 };

@@ -44,13 +44,13 @@ DefaultInput.propTypes = {
     title: PropType.string,
     type: PropType.string,
     isInlined: PropType.bool,
-    additionalClasses: PropType.string,
+    additionalClasses: PropType.string
 };
 
 DefaultInput.defaultProps = {
     type: "text",
     isInlined: false,
-    size: "l",
+    size: "l"
 };
 
 export default DefaultInput;

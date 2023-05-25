@@ -8,12 +8,12 @@ const DefaultDropdown = ({ children, ...props }) => {
 
     const dropdownClasses = [
         "default-dropdown",
-        `${props.additionalClasses ? props.additionalClasses : ""}`,
+        `${props.additionalClasses ? props.additionalClasses : ""}`
     ].join(" ");
 
     const listClasses = [
         "default-dropdown__list",
-        `default-dropdown__list_${show ? "active" : "inactive"}`,
+        `default-dropdown__list_${show ? "active" : "inactive"}`
     ].join(" ");
 
     const toggleList = (e) => {
@@ -62,12 +62,12 @@ DefaultDropdown.propTypes = {
     items: PropType.array.isRequired,
     onSelect: PropType.func.isRequired,
     schema: PropType.string.isRequired,
-    additionalClasses: PropType.string,
+    additionalClasses: PropType.string
 };
 
 DefaultDropdown.defaultProps = {
     isInlined: false,
-    size: "l",
+    size: "l"
 };
 
 export default DefaultDropdown;
