@@ -11,8 +11,6 @@ const Users = () => {
   const [professions, setProfession] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProf, setSelectedProf] = useState();
-
-  const count = users.length;
   const pageSize = 4;
 
   useEffect(() => {
@@ -23,6 +21,10 @@ const Users = () => {
       })
     );
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedProf]);
 
   const handlePageChange = (pageIndex) => {
     setCurrentPage(pageIndex);
@@ -63,6 +65,7 @@ const Users = () => {
     selectedProf && selectedProf._id
       ? users.filter((u) => u.profession === selectedProf)
       : users;
+  const count = filteredUsers.length;
 
   const userCrop = paginate(filteredUsers, currentPage, pageSize);
 
@@ -76,9 +79,9 @@ const Users = () => {
   };
 
   return (
-    <div>
+    <div className="d-flex">
       {professions && (
-        <>
+        <div className="d-flex flex-column flex-shrink-0 p-3">
           <GroupList
             items={professions}
             onItemSelect={handleProffesionSelect}
@@ -87,30 +90,35 @@ const Users = () => {
           <button className="btn btn-secondary mt-2" onClick={clearFilter}>
             Сбросить фильтры
           </button>
-        </>
+        </div>
       )}
-      <SearchStatus usersLength={count} />
-      {count !== 0 && (
-        <table className="table">
-          {getTableHeader()}
-          <tbody>
-            {userCrop.map((u) => (
-              <User
-                key={u._id}
-                user={u}
-                onSelectToFavorite={handleSelectToFavorite}
-                onDelete={handleDelete}
-              />
-            ))}
-          </tbody>
-        </table>
-      )}
-      <Pagination
-        itemsCount={count}
-        pageSize={pageSize}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+
+      <div className="d-flex flex-column w-100">
+        <SearchStatus usersLength={count} />
+        {count > 0 && (
+          <table className="table">
+            {getTableHeader()}
+            <tbody>
+              {userCrop.map((u) => (
+                <User
+                  key={u._id}
+                  user={u}
+                  onSelectToFavorite={handleSelectToFavorite}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </tbody>
+          </table>
+        )}
+        <div className="d-flex justify-content-center">
+          <Pagination
+            itemsCount={count}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      </div>
     </div>
   );
 };
