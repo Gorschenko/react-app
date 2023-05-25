@@ -17,7 +17,7 @@ const Users = () => {
     api.professions.fetchAll().then((professions) =>
       setProfession({
         ...professions,
-        allProfession: { name: "Все профессии" },
+        allProfession: { name: "Все профессии", _id: "123" },
       })
     );
   }, []);
@@ -71,7 +71,6 @@ const Users = () => {
 
   const handleProffesionSelect = (item) => {
     setSelectedProf(item);
-    console.log(item);
   };
 
   const clearFilter = () => {
