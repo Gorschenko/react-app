@@ -1,38 +1,36 @@
-import 'components/base/DefaultSelect/DefaultSelect.scss';
-import PropType from 'prop-types';
-import React, { useState } from 'react';
+import "components/base/DefaultSelect/DefaultSelect.scss";
+import PropType from "prop-types";
+import React, { useState } from "react";
 
 const DefaultSelect = (props) => {
     const [show, setShow] = useState(false);
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useState("");
 
     const selectClasses = [
-        'default-select',
-        `default-select_${props.isInlined ? 'inlined' : 'blocked'}`,
+        "default-select",
+        `default-select_${props.isInlined ? "inlined" : "blocked"}`,
         `default-select_${props.size}`,
-        `${props.additionalClasses ? props.additionalClasses : ''}`,
-    ].join(' ');
+        `${props.additionalClasses ? props.additionalClasses : ""}`,
+    ].join(" ");
 
-    const iconClasses = [
-        'bx',
-        `bx-chevron-${show ? 'up' : 'down'}`,
-    ].join(' ');
+    const iconClasses = ["bx", `bx-chevron-${show ? "up" : "down"}`].join(" ");
 
     const listClasses = [
-        'default-select__list',
-        `default-select__list_${show ? 'active' : 'inactive'}`,
-    ].join(' ');
+        "default-select__list",
+        `default-select__list_${show ? "active" : "inactive"}`,
+    ].join(" ");
 
-    const error = props.errors[props.name] &&
-        <p className="text_xs color_danger">{props.errors[props.name].message }</p>;
+    const error = props.errors[props.name] && (
+        <p className="text_xs color_danger">
+            {props.errors[props.name].message}
+        </p>
+    );
 
-    const title = props.title &&
-        <label
-            htmlFor={props.name}
-            className="display-block text_xs"
-        >
+    const title = props.title && (
+        <label htmlFor={props.name} className="display-block text_xs">
             {props.title}
-        </label>;
+        </label>
+    );
 
     const toggleList = (e) => {
         setShow(!show);
@@ -42,19 +40,19 @@ const DefaultSelect = (props) => {
         setQuery(item[props.schema]);
     };
 
-    const items = props.items.length
-        ?   props.items.map(i =>
-                <li
-                    className="default-select__list-item"
-                    key={i[props.schema]}
-                    onClick={e => selectItem(i)}
-                >
-                    {i[props.schema]}
-                </li>
-            )
-        :   <li className="default-select__list-item">
-                Информация отсутствует
-            </li>;
+    const items = props.items.length ? (
+        props.items.map((i) => (
+            <li
+                className="default-select__list-item"
+                key={i[props.schema]}
+                onClick={(e) => selectItem(i)}
+            >
+                {i[props.schema]}
+            </li>
+        ))
+    ) : (
+        <li className="default-select__list-item">Информация отсутствует</li>
+    );
 
     return (
         <div>
@@ -69,19 +67,17 @@ const DefaultSelect = (props) => {
                             readOnly
                             placeholder={props.placeholder}
                             value={query}
-                            { ...props.register(props.name) }
+                            {...props.register(props.name)}
                             onClick={toggleList}
                         />
                         <i className={iconClasses} />
                     </div>
-                    <ul className={listClasses}>
-                        {items}
-                    </ul>
+                    <ul className={listClasses}>{items}</ul>
                 </div>
             </div>
             {error}
-        </div>  
-    )
+        </div>
+    );
 };
 
 DefaultSelect.propTypes = {
@@ -94,11 +90,11 @@ DefaultSelect.propTypes = {
     placeholder: PropType.string,
     isInlined: PropType.bool,
     additionalClasses: PropType.string,
-}
+};
 
 DefaultSelect.defaultProps = {
     isInlined: false,
-    size: 'l',
-}
+    size: "l",
+};
 
 export default DefaultSelect;

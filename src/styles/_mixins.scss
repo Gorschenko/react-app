@@ -14,11 +14,11 @@
 @mixin text_xl {
     font-size: 20px;
 }
-  
+
 @mixin text_l {
     font-size: 18px;
 }
-  
+
 @mixin text_m {
     font-size: 16px;
 }
@@ -46,7 +46,7 @@
     align-items: center;
     justify-content: center;
 }
-  
+
 @mixin flex-column-centered {
     display: flex;
     flex-direction: column;

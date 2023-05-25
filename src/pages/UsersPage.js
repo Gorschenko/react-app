@@ -1,7 +1,7 @@
 import Users from "components/users";
 
 const SecondPage = () => {
-  return <Users />;
+    return <Users />;
 };
 
 export default SecondPage;

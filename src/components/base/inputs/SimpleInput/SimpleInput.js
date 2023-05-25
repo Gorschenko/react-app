@@ -1,51 +1,49 @@
-import React from 'react';
-import PropType from 'prop-types';
-import 'components/base/inputs/baseInputs.scss';
+import React from "react";
+import PropType from "prop-types";
+import "components/base/inputs/baseInputs.scss";
 
 export default class SimpleInput extends React.Component {
     constructor() {
         super();
         this.state = {
-            query: '',
+            query: "",
         };
         this.actions = {
-            onChange: this.onChange.bind(this)
-        }
+            onChange: this.onChange.bind(this),
+        };
     }
 
     componentDidMount() {
         if (this.props.query !== this.state.query) {
             this.setState({ query: this.props.query });
-        };
+        }
     }
-    
+
     componentDidUpdate(prevProps, prevState) {
         if (this.props.query !== this.state.query) {
             this.setState({ query: this.props.query });
-        };
+        }
     }
 
-    onChange ($event) {
+    onChange($event) {
         this.setState({ query: $event.target.value });
         this.props.onChange($event.target.value);
     }
 
     render() {
-        const title = this.props.title &&
-            <label
-                htmlFor={this.props.name}
-                className="display-block"
-            >
+        const title = this.props.title && (
+            <label htmlFor={this.props.name} className="display-block">
                 {this.props.title}
             </label>
+        );
 
         const inputClasses = `
             default-input
-            default-input_${this.props.isInlined ? 'inlined' : 'blocked'}
+            default-input_${this.props.isInlined ? "inlined" : "blocked"}
             default-input_${this.props.size}
-            ${this.props.additionalClasses ? this.props.additionalClasses : ''}
+            ${this.props.additionalClasses ? this.props.additionalClasses : ""}
         `;
-        
+
         return (
             <div className={inputClasses}>
                 {title}
@@ -57,7 +55,7 @@ export default class SimpleInput extends React.Component {
                     onChange={this.actions.onChange}
                 />
             </div>
-        )
+        );
     }
 }
 
@@ -69,10 +67,10 @@ SimpleInput.propTypes = {
     type: PropType.string,
     isInlined: PropType.bool,
     additionalClasses: PropType.string,
-}
+};
 
 SimpleInput.defaultProps = {
-    type: 'text',
+    type: "text",
     isInlined: false,
-    size: 'l',
-}
+    size: "l",
+};

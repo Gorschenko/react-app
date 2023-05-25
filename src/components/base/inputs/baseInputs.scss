@@ -1,5 +1,4 @@
 .default-input {
-
     &_inlined {
         display: flex;
         align-items: center;
@@ -8,7 +7,7 @@
     &_blocked {
         @include flex-column;
     }
-    
+
     label {
         @include text_s;
     }
@@ -28,7 +27,7 @@
     &_m {
         input {
             padding: 4px 8px;
-            @include text_xs; 
+            @include text_xs;
         }
     }
 }

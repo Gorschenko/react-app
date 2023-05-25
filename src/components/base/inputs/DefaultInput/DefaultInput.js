@@ -1,27 +1,26 @@
-import PropType from 'prop-types';
-import 'components/base/inputs/baseInputs.scss';
+import PropType from "prop-types";
+import "components/base/inputs/baseInputs.scss";
 
 const DefaultInput = (props) => {
-    const title = props.title &&
-        <label
-            htmlFor={props.name}
-            className="display-block"
-        >
+    const title = props.title && (
+        <label htmlFor={props.name} className="display-block">
             {props.title}
         </label>
+    );
 
-    
     const inputClasses = `
         default-input
-        default-input_${props.isInlined ? 'inlined' : 'blocked'}
+        default-input_${props.isInlined ? "inlined" : "blocked"}
         default-input_${props.size}
-        ${props.additionalClasses ? props.additionalClasses : ''}
+        ${props.additionalClasses ? props.additionalClasses : ""}
     `;
 
-    const error = props.errors[props.name] &&
-        <p className="text_xs color_danger">{props.errors[props.name].message }</p>
+    const error = props.errors[props.name] && (
+        <p className="text_xs color_danger">
+            {props.errors[props.name].message}
+        </p>
+    );
 
-    
     return (
         <div>
             <div className={inputClasses}>
@@ -30,12 +29,12 @@ const DefaultInput = (props) => {
                     id={props.name}
                     name={props.name}
                     type={props.type}
-                    { ...props.register(props.name) }
+                    {...props.register(props.name)}
                 />
             </div>
             {error}
-        </div>  
-    )
+        </div>
+    );
 };
 
 DefaultInput.propTypes = {
@@ -46,12 +45,12 @@ DefaultInput.propTypes = {
     type: PropType.string,
     isInlined: PropType.bool,
     additionalClasses: PropType.string,
-}
+};
 
 DefaultInput.defaultProps = {
-    type: 'text',
+    type: "text",
     isInlined: false,
-    size: 'l',
-}
+    size: "l",
+};
 
 export default DefaultInput;

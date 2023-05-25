@@ -2,19 +2,19 @@
     &_xl {
         @include text_xl;
     }
-  
+
     &_l {
         @include text_l;
     }
-  
+
     &_m {
         @include text_m;
     }
-  
+
     &_s {
         @include text_s;
     }
-  
+
     &_xs {
         @include text_xs;
     }
@@ -22,7 +22,7 @@
     &_weight_head {
         font-weight: $t-weight-head;
     }
- 
+
     &_weight_accent {
         font-weight: $t-weight-accent;
     }
@@ -30,15 +30,15 @@
     &_blocked {
         display: block;
     }
-    
+
     &_centered {
         text-align: center;
     }
- 
+
     &_nowrap {
         white-space: nowrap;
     }
- 
+
     &_ellipsis {
         overflow: hidden;
         text-overflow: ellipsis;
