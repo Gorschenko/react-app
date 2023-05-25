@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import User from "components/user";
 import SearchStatus from "components/searchStatus";
+import Pagination from "components/pagination";
 import api from "../api";
+import { paginate } from "utils/pagination";
 
 const Users = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
+  const count = users.length;
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 4;
+
+  const handlePageChange = (pageIndex) => {
+    setCurrentPage(pageIndex);
+    console.log("page: ", pageIndex);
+  };
 
   const getTableHeader = () => {
     return (
@@ -37,14 +47,17 @@ const Users = () => {
     );
   };
 
+  const userCrop = paginate(users, currentPage, pageSize);
+  console.log(userCrop);
+
   return (
     <div>
-      <SearchStatus usersLength={users.length} />
-      {users.length !== 0 && (
+      <SearchStatus usersLength={count} />
+      {count !== 0 && (
         <table className="table">
           {getTableHeader()}
           <tbody>
-            {users.map((u) => (
+            {userCrop.map((u) => (
               <User
                 key={u._id}
                 user={u}
@@ -55,6 +68,12 @@ const Users = () => {
           </tbody>
         </table>
       )}
+      <Pagination
+        itemsCount={count}
+        pageSize={pageSize}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
