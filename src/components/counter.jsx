@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 const Counter = (props) => {
-  const [value, setValue] = useState(props.value);
+  // const [value, setValue] = useState(props.value);
+  const { value } = props;
   // const [tags, setTags] = useState(["tag1", "tag2", "tag3"]);
 
   const formatValue = () => {
@@ -15,13 +16,15 @@ const Counter = (props) => {
   };
 
   const handleIncrement = () => {
-    setValue(value + 1);
+    props.onIncrement(props.id);
+    // setValue(value + 1);
     // setValue((prevState) => prevState + 1)
     // setValue((prevState) => prevState + 1)
   };
 
   const handleDecrement = () => {
-    setValue(value - 1);
+    props.onDecrement(props.id);
+    // setValue(value - 1);
   };
 
   // const handleTagChange = (id) => {
@@ -52,6 +55,12 @@ const Counter = (props) => {
       </button>
       <button className="btn btn-primary btn-sm m-2" onClick={handleDecrement}>
         -
+      </button>
+      <button
+        className="btn btn-danger btn-sm m-2"
+        onClick={() => props.onDelete(props.id)}
+      >
+        Delete
       </button>
     </div>
   );

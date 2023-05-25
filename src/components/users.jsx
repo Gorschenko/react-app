@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import User from "components/user";
+import SearchStatus from "components/searchStatus";
 import api from "../api";
 
 const Users = () => {
@@ -14,42 +15,10 @@ const Users = () => {
           <th scope="col">Профессия</th>
           <th scope="col">Встретился раз</th>
           <th scope="col">Оценка</th>
+          <th scope="col">Избранное</th>
           <th scope="col">*</th>
         </tr>
       </thead>
-    );
-  };
-
-  const getUserBagesList = (qualities) => {
-    const classes = "badge rounded-pill m-1 ";
-    return (
-      <div>
-        {qualities.map((q) => (
-          <span key={q._id} className={classes + "bg-" + q.color}>
-            {q.name}
-          </span>
-        ))}
-      </div>
-    );
-  };
-
-  const getTableRow = (user) => {
-    return (
-      <tr key={user._id}>
-        <td>{user.name}</td>
-        <td>{getUserBagesList(user.qualities)}</td>
-        <td>{user.profession.name}</td>
-        <td>{user.completedMeetings}</td>
-        <td>{user.rate}</td>
-        <td>
-          <button
-            className="btn btn-sm btn-danger"
-            onClick={() => handleDelete(user._id)}
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
     );
   };
 
@@ -57,18 +26,35 @@ const Users = () => {
     setUsers((prevState) => prevState.filter((u) => u._id !== id));
   };
 
+  const handleSelectToFavorite = (id) => {
+    setUsers((prevState) =>
+      prevState.map((u) => {
+        if (u._id === id) {
+          u.bookmark = !u.bookmark;
+        }
+        return u;
+      })
+    );
+  };
+
   return (
     <div>
+      <SearchStatus usersLength={users.length} />
       {users.length !== 0 && (
-        <div>
-          <h1>Количество человек {users.length}</h1>
-          <table className="table">
-            {getTableHeader()}
-            <tbody>{users.map(getTableRow)}</tbody>
-          </table>
-        </div>
+        <table className="table">
+          {getTableHeader()}
+          <tbody>
+            {users.map((u) => (
+              <User
+                key={u._id}
+                user={u}
+                onSelectToFavorite={handleSelectToFavorite}
+                onDelete={handleDelete}
+              />
+            ))}
+          </tbody>
+        </table>
       )}
-      {users.length === 0 && <h1>Никто не прийдет</h1>}
     </div>
   );
 };
