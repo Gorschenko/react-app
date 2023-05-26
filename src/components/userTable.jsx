@@ -1,5 +1,7 @@
-import User from "components/user";
 import TableHeader from "components/tableHeader";
+import TableBody from "components/tableBody";
+import Bookmark from "components/bookmark";
+
 const UserTable = ({
   users,
   onDelete,
@@ -8,12 +10,12 @@ const UserTable = ({
   selectedSort,
 }) => {
   const columns = {
-    name: { iter: "name", name: "Имя" },
+    name: { path: "name", name: "Имя" },
     qualities: { name: "Качества" },
-    professions: { iter: "professions.name", name: "Профессии" },
-    completedMeetings: { iter: "completedMeetings", name: "Встретился раз" },
-    rate: { iter: "rate", name: "Оценка" },
-    bookmark: { iter: "bookmark", name: "Избранное" },
+    professions: { path: "profession.name", name: "Профессии" },
+    completedMeetings: { path: "completedMeetings", name: "Встретился раз" },
+    rate: { path: "rate", name: "Оценка" },
+    bookmark: { path: "bookmark", name: "Избранное", component: "bookmark" },
     delete: {},
   };
   return (
@@ -23,16 +25,7 @@ const UserTable = ({
         selectedSort={selectedSort}
         columns={columns}
       />
-      <tbody>
-        {users.map((u) => (
-          <User
-            key={u._id}
-            user={u}
-            onSelectToFavorite={onSelectToFavorite}
-            onDelete={onDelete}
-          />
-        ))}
-      </tbody>
+      <TableBody columns={columns} data={users} />
     </table>
   );
 };

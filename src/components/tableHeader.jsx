@@ -1,12 +1,12 @@
 const TableHeader = ({ onSort, selectedSort, columns }) => {
   const handleSort = (item) => {
-    if (selectedSort.iter === item) {
+    if (selectedSort.path === item) {
       onSort((selectedSort) => ({
         ...selectedSort,
         order: selectedSort.order === "asc" ? "desc" : "asc",
       }));
     } else {
-      onSort({ iter: item, order: "asc" });
+      onSort({ path: item, order: "asc" });
     }
   };
   return (
@@ -15,7 +15,7 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
         {Object.keys(columns).map((c) => (
           <th
             key={c}
-            onClick={columns[c].iter ? () => handleSort(columns[c].iter) : null}
+            onClick={columns[c].path ? () => handleSort(columns[c].path) : null}
             scope="col"
             role="button"
           >
