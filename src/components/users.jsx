@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import User from "components/user";
+import _ from "lodash";
+import UserTable from "components/userTable";
 import SearchStatus from "components/searchStatus";
 import Pagination from "components/pagination";
 import api from "../api";
@@ -11,15 +12,13 @@ const Users = () => {
   const [professions, setProfession] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProf, setSelectedProf] = useState();
+  const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
   const pageSize = 4;
 
   useEffect(() => {
-    api.professions.fetchAll().then((professions) =>
-      setProfession({
-        ...professions,
-        allProfession: { name: "Все профессии", _id: "123" },
-      })
-    );
+    api.professions
+      .fetchAll()
+      .then((professions) => setProfession(professions));
   }, []);
 
   useEffect(() => {
@@ -28,22 +27,6 @@ const Users = () => {
 
   const handlePageChange = (pageIndex) => {
     setCurrentPage(pageIndex);
-  };
-
-  const getTableHeader = () => {
-    return (
-      <thead>
-        <tr>
-          <th scope="col">Имя</th>
-          <th scope="col">Качества</th>
-          <th scope="col">Профессия</th>
-          <th scope="col">Встретился раз</th>
-          <th scope="col">Оценка</th>
-          <th scope="col">Избранное</th>
-          <th scope="col">*</th>
-        </tr>
-      </thead>
-    );
   };
 
   const handleDelete = (id) => {
@@ -66,15 +49,19 @@ const Users = () => {
       ? users.filter((u) => u.profession === selectedProf)
       : users;
   const count = filteredUsers.length;
+  const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+  const userCrop = paginate(sortedUsers, currentPage, pageSize);
 
-  const userCrop = paginate(filteredUsers, currentPage, pageSize);
-
-  const handleProffesionSelect = (item) => {
+  const handleProfessionSelect = (item) => {
     setSelectedProf(item);
   };
 
   const clearFilter = () => {
     setSelectedProf();
+  };
+
+  const handleSort = (item) => {
+    setSortBy(item);
   };
 
   return (
@@ -83,7 +70,7 @@ const Users = () => {
         <div className="d-flex flex-column flex-shrink-0 p-3">
           <GroupList
             items={professions}
-            onItemSelect={handleProffesionSelect}
+            onItemSelect={handleProfessionSelect}
             selectedItem={selectedProf}
           />
           <button className="btn btn-secondary mt-2" onClick={clearFilter}>
@@ -95,19 +82,13 @@ const Users = () => {
       <div className="d-flex flex-column w-100">
         <SearchStatus usersLength={count} />
         {count > 0 && (
-          <table className="table">
-            {getTableHeader()}
-            <tbody>
-              {userCrop.map((u) => (
-                <User
-                  key={u._id}
-                  user={u}
-                  onSelectToFavorite={handleSelectToFavorite}
-                  onDelete={handleDelete}
-                />
-              ))}
-            </tbody>
-          </table>
+          <UserTable
+            users={userCrop}
+            onSelectToFavorite={handleSelectToFavorite}
+            onDelete={handleDelete}
+            onSort={handleSort}
+            selectedSort={sortBy}
+          />
         )}
         <div className="d-flex justify-content-center">
           <Pagination
