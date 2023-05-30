@@ -1,7 +1,6 @@
-import TableHeader from "components/tableHeader";
-import TableBody from "components/tableBody";
 import Bookmark from "components/bookmark";
 import QualitiesList from "components/qualitiesList";
+import Table from "components/table";
 
 const UserTable = ({
   users,
@@ -41,14 +40,12 @@ const UserTable = ({
     },
   };
   return (
-    <table className="table">
-      <TableHeader
-        onSort={onSort}
-        selectedSort={selectedSort}
-        columns={columns}
-      />
-      <TableBody columns={columns} data={users} />
-    </table>
+    <Table
+      onSort={onSort}
+      selectedSort={selectedSort}
+      columns={columns}
+      data={users}
+    />
   );
 };
 
