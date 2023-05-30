@@ -1,6 +1,7 @@
 import TableHeader from "components/tableHeader";
 import TableBody from "components/tableBody";
 import Bookmark from "components/bookmark";
+import QualitiesList from "components/qualitiesList";
 
 const UserTable = ({
   users,
@@ -11,12 +12,33 @@ const UserTable = ({
 }) => {
   const columns = {
     name: { path: "name", name: "Имя" },
-    qualities: { name: "Качества" },
+    qualities: {
+      name: "Качества",
+      component: (user) => <QualitiesList qualities={user.qualities} />,
+    },
     professions: { path: "profession.name", name: "Профессии" },
     completedMeetings: { path: "completedMeetings", name: "Встретился раз" },
     rate: { path: "rate", name: "Оценка" },
-    bookmark: { path: "bookmark", name: "Избранное", component: "bookmark" },
-    delete: {},
+    bookmark: {
+      path: "bookmark",
+      name: "Избранное",
+      component: (user) => (
+        <Bookmark
+          bookmark={user.bookmark}
+          onSelect={() => onSelectToFavorite(user._id)}
+        />
+      ),
+    },
+    delete: {
+      component: (user) => (
+        <button
+          className="btn btn-sm btn-danger"
+          onClick={() => onDelete(user._id)}
+        >
+          Delete
+        </button>
+      ),
+    },
   };
   return (
     <table className="table">

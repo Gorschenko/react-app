@@ -1,16 +1,12 @@
 import React from "react";
-import Qualitie from "components/qualitie";
 import Bookmark from "components/bookmark";
+import QualitiesList from "components/qualitiesList";
 
 const User = ({ user, onDelete, onSelectToFavorite }) => {
   return (
     <tr>
       <td>{user.name}</td>
-      <td>
-        {user.qualities.map((q) => (
-          <Qualitie key={q._id} qualitie={q} />
-        ))}
-      </td>
+      <QualitiesList qualities={user.qualities} />
       <td>{user.profession.name}</td>
       <td>{user.completedMeetings}</td>
       <td>{user.rate}</td>
