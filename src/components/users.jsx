@@ -13,11 +13,7 @@ const Users = () => {
     api.users.fetchAll().then((data) => setUsers(data));
   }, []);
   const [professions, setProfession] = useState();
-  useEffect(() => {
-    api.professions
-      .fetchAll()
-      .then((professions) => setProfession(professions));
-  }, []);
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProf, setSelectedProf] = useState();
   const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
@@ -30,8 +26,14 @@ const Users = () => {
   }, []);
 
   useEffect(() => {
+    api.professions
+      .fetchAll()
+      .then((professions) => setProfession(professions));
+  }, []);
+
+  useEffect(() => {
     setCurrentPage(1);
-  }, [selectedProf]);
+  }, [selectedProf, searchQuery]);
 
   const handlePageChange = (pageIndex) => {
     setCurrentPage(pageIndex);
@@ -52,15 +54,25 @@ const Users = () => {
     );
   };
 
-  const filteredUsers =
-    selectedProf && selectedProf._id
-      ? users.filter((u) => u.profession === selectedProf)
-      : users;
+  const handleSearchQuery = ({ target }) => {
+    setSelectedProf(null);
+    setSearchQuery(target.value);
+  };
+
+  const filteredUsers = searchQuery
+    ? users?.filter(
+        (user) =>
+          user.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
+      )
+    : selectedProf && selectedProf._id
+    ? users?.filter((u) => u.profession === selectedProf)
+    : users;
   const count = filteredUsers?.length;
   const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
   const userCrop = paginate(sortedUsers, currentPage, pageSize);
 
   const handleProfessionSelect = (item) => {
+    if (searchQuery !== "") setSearchQuery("");
     setSelectedProf(item);
   };
 
@@ -89,6 +101,13 @@ const Users = () => {
 
       <div className="d-flex flex-column w-100">
         <SearchStatus usersLength={count} />
+        <input
+          type="text"
+          name="searchQuery"
+          placeholder="Search..."
+          onChange={handleSearchQuery}
+          value={searchQuery}
+        />
         {count > 0 && (
           <UserTable
             users={userCrop}
