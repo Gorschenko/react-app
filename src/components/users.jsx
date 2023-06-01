@@ -8,8 +8,16 @@ import { paginate } from "utils/pagination";
 import GroupList from "components/groupList";
 
 const Users = () => {
-  const [users, setUsers] = useState(api.users.fetchAll());
+  const [users, setUsers] = useState();
+  useEffect(() => {
+    api.users.fetchAll().then((data) => setUsers(data));
+  }, []);
   const [professions, setProfession] = useState();
+  useEffect(() => {
+    api.professions
+      .fetchAll()
+      .then((professions) => setProfession(professions));
+  }, []);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProf, setSelectedProf] = useState();
   const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
@@ -48,7 +56,7 @@ const Users = () => {
     selectedProf && selectedProf._id
       ? users.filter((u) => u.profession === selectedProf)
       : users;
-  const count = filteredUsers.length;
+  const count = filteredUsers?.length;
   const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
   const userCrop = paginate(sortedUsers, currentPage, pageSize);
 

@@ -8,7 +8,7 @@ export const professions = {
 };
 
 const fetchAll = () =>
-  new Promise((resolve) => setTimeout(resolve(professions), 5000));
+  new Promise((resolve) => setTimeout(resolve(professions), 2000));
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
