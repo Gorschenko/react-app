@@ -1,30 +1,33 @@
-import React from "react";
-import Bookmark from "components/bookmark";
+import React, { useEffect, useState } from "react";
 import QualitiesList from "components/qualitiesList";
+import { useHistory } from "react-router-dom";
+import api from "../api";
 
-const User = ({ user, onDelete, onSelectToFavorite }) => {
+const User = ({ id }) => {
+  const history = useHistory();
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    api.users.getById(id).then((data) => setUser(data));
+  }, [id]);
+
   return (
-    <tr>
-      <td>{user.name}</td>
-      <QualitiesList qualities={user.qualities} />
-      <td>{user.profession.name}</td>
-      <td>{user.completedMeetings}</td>
-      <td>{user.rate}</td>
-      <td>
-        <Bookmark
-          bookmark={user.bookmark}
-          onSelect={() => onSelectToFavorite(user._id)}
-        />
-      </td>
-      <td>
+    user && (
+      <div className="p-2">
+        <p>{user.name}</p>
+        <QualitiesList qualities={user.qualities} />
+        <p>{user.profession.name}</p>
+        <p>{user.completedMeetings}</p>
+        <p>{user.rate}</p>
+
         <button
-          className="btn btn-sm btn-danger"
-          onClick={() => onDelete(user._id)}
+          className="btn btn-sm btn-primary"
+          onClick={() => history.push("/users")}
         >
-          Delete
+          Ко всем пользователям
         </button>
-      </td>
-    </tr>
+      </div>
+    )
   );
 };
 

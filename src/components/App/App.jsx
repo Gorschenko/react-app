@@ -24,7 +24,7 @@ const App = () => {
         />
 
         <Route path="/ui" component={MainPage} />
-        <Route path="/users" component={UsersPage} />
+        <Route path="/users/:userId?" component={UsersPage} />
         <Route path="/counters" component={FirstPage} />
         <Route path="/404" component={NotFound} />
         <Redirect from="/admin" to="/dashboard" />

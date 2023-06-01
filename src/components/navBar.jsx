@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <ul>
+    <ul className="d-flex gap-2">
       <li>
         <Link to="/">Home</Link>
       </li>
