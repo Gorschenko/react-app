@@ -24,7 +24,19 @@ const Login = () => {
         message: "Поле должно быть email",
       },
     },
-    password: { isRequired: { message: "Поле необходимо заполнить" } },
+    password: {
+      isRequired: { message: "Поле необходимо заполнить" },
+      isCapitalSymbol: {
+        message: "Должна быть одна заглавная бука",
+      },
+      isContainDigit: {
+        message: "Должна быть одна цифра",
+      },
+      min: {
+        message: "Минимум 8 символов",
+        value: 8,
+      },
+    },
   };
 
   useEffect(() => {
@@ -45,25 +57,37 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        label="Электронная почта"
-        type="text"
-        name="email"
-        value={data.email}
-        error={errors.email}
-        onChange={handleChange}
-      />
-      <TextField
-        label="Пароль"
-        type="passwrod"
-        name="password"
-        value={data.password}
-        error={errors.password}
-        onChange={handleChange}
-      />
-      <button className="btn btn-primary">Submit</button>
-    </form>
+    <div className="container mt-5">
+      <div className="row">
+        <div className="col-md-6 offset-md-3 shadow p-3">
+          <h3 className="mb-4">Login</h3>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              label="Электронная почта"
+              type="text"
+              name="email"
+              value={data.email}
+              error={errors.email}
+              onChange={handleChange}
+            />
+            <TextField
+              label="Пароль"
+              type="password"
+              name="password"
+              value={data.password}
+              error={errors.password}
+              onChange={handleChange}
+            />
+            <button
+              className="btn btn-primary w-100 mx-auto"
+              disabled={Object.keys(errors).length}
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 

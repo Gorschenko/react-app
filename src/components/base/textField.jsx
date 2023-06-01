@@ -1,6 +1,9 @@
 const TextField = ({ label, type, name, onChange, value, error }) => {
+  const getInputClasses = () => {
+    return "form-control is-" + (error ? "invalid" : "valid");
+  };
   return (
-    <div>
+    <div className="mb-4">
       <label htmlFor={name}>{label}</label>
       <input
         type={type}
@@ -8,8 +11,9 @@ const TextField = ({ label, type, name, onChange, value, error }) => {
         name={name}
         value={value}
         onChange={onChange}
+        className={getInputClasses()}
       />
-      {error && <p>{error}</p>}
+      {error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
 };
