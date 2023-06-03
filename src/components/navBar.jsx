@@ -7,6 +7,9 @@ const NavBar = () => {
         <Link to="/">Home</Link>
       </li>
       <li>
+        <Link to="/custom-redux">Custom Redux</Link>
+      </li>
+      <li>
         <Link to="/login">Login</Link>
       </li>
       <li>

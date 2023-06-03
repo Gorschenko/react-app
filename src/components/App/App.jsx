@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import MainPage from "pages/MainPage";
 import UsersPage from "pages/UsersPage";
 import FirstPage from "pages/FirstPage";
+import CustomReduxPage from "pages/CustomReduxPage";
 import Navbar from "components/navBar";
 import Home from "components/routerTest/home";
 import Login from "components/routerTest/login";
@@ -16,6 +17,7 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/custom-redux" component={CustomReduxPage} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/login" component={Login} />
         <Route
