@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 
 const taskReducer = (state, action) => {
   switch (action.type) {
@@ -17,13 +17,23 @@ const taskReducer = (state, action) => {
 
 const createStore = (reducer, initialState) => {
   let state = initialState;
+  let listeners = [];
 
   const getState = () => state;
+
   const dispatch = (action) => {
     state = reducer(state, action);
+    for (let i = 0; i < listeners.length; i++) {
+      const listener = listeners[i];
+      listener();
+    }
   };
 
-  return { getState, dispatch };
+  const subscribe = (listener) => {
+    listeners.push(listener);
+  };
+
+  return { getState, dispatch, subscribe };
 };
 
 const store = createStore(taskReducer, [
@@ -32,12 +42,17 @@ const store = createStore(taskReducer, [
 ]);
 
 const CustomReduxPage = () => {
-  const state = store.getState();
+  const [state, setState] = useState(store.getState());
   console.log(state);
+
+  useEffect(() => {
+    store.subscribe(() => {
+      setState(store.getState());
+    });
+  }, []);
 
   const completeTask = (taskId) => {
     store.dispatch({ type: "task/completed", payload: { id: taskId } });
-    console.log(store.getState());
   };
 
   return (
