@@ -1,45 +1,14 @@
 import { useEffect, useState } from "react";
+import { createStore } from "store/createStore";
+import { taskReducer } from "store/taskReducer";
+import * as actions from "../store/actionTypes";
 
-const taskReducer = (state, action) => {
-  switch (action.type) {
-    case "task/completed": {
-      const newArray = [...state];
-      const elementIndex = newArray.findIndex(
-        (el) => el.id === action.payload.id
-      );
-      newArray[elementIndex].completed = true;
-      return newArray;
-    }
-    default:
-      break;
-  }
-};
+const initialState = [
+  { id: 1, title: "Task 1", completed: false },
+  { id: 2, title: "Task 2", completed: false },
+];
 
-const createStore = (reducer, initialState) => {
-  let state = initialState;
-  let listeners = [];
-
-  const getState = () => state;
-
-  const dispatch = (action) => {
-    state = reducer(state, action);
-    for (let i = 0; i < listeners.length; i++) {
-      const listener = listeners[i];
-      listener();
-    }
-  };
-
-  const subscribe = (listener) => {
-    listeners.push(listener);
-  };
-
-  return { getState, dispatch, subscribe };
-};
-
-const store = createStore(taskReducer, [
-  { id: 1, description: "Task 1", completed: false },
-  { id: 2, description: "Task 2", completed: false },
-]);
+const store = createStore(taskReducer, initialState);
 
 const CustomReduxPage = () => {
   const [state, setState] = useState(store.getState());
@@ -52,7 +21,17 @@ const CustomReduxPage = () => {
   }, []);
 
   const completeTask = (taskId) => {
-    store.dispatch({ type: "task/completed", payload: { id: taskId } });
+    store.dispatch({
+      type: actions.taskUpdated,
+      payload: { id: taskId, completed: true },
+    });
+  };
+
+  const changeTitle = (taskId) => {
+    store.dispatch({
+      type: actions.taskUpdated,
+      payload: { id: taskId, title: `New title for ${taskId}` },
+    });
   };
 
   return (
@@ -62,13 +41,19 @@ const CustomReduxPage = () => {
       <ul>
         {state.map((el) => (
           <li key={el.id}>
-            <p>{el.description}</p>
+            <p>{el.title}</p>
             <p>{`Completed: ${el.completed}`}</p>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary m-2"
               onClick={() => completeTask(el.id)}
             >
               Complete
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => changeTitle(el.id)}
+            >
+              Change title
             </button>
             <hr />
           </li>
