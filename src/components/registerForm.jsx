@@ -1,4 +1,5 @@
 import TextField from "components/base/textField";
+import SelectField from "components/base/selectField";
 import { useState, useEffect } from "react";
 import { validator } from "utils/validator";
 import api from "../api";
@@ -47,6 +48,9 @@ const RegisterForm = () => {
         value: 8,
       },
     },
+    profession: {
+      isRequired: { message: "Поле необходимо заполнить" },
+    },
   };
 
   useEffect(() => {
@@ -84,33 +88,17 @@ const RegisterForm = () => {
         error={errors.password}
         onChange={handleChange}
       />
-      <div className="mb-4">
-        <label htmlFor="validationCustom04" className="form-label">
-          State
-        </label>
-        <select
-          className="form-select"
-          id="validationCustom04"
-          required
-          name="profession"
-          value={data.profession}
-          onChange={handleChange}
-        >
-          <option disabled value="">
-            Choose...
-          </option>
-          {professions &&
-            Object.keys(professions).map((professionName) => (
-              <option
-                key={professions[professionName]._id}
-                value={professions[professionName]._id}
-              >
-                {professions[professionName].name}
-              </option>
-            ))}
-        </select>
-        <div className="invalid-feedback">Please select a valid state.</div>
-      </div>
+      <SelectField
+        label="Выберите профессию"
+        type="text"
+        name="profession"
+        defaultOption="Choose..."
+        value={data.profession}
+        options={professions}
+        error={errors.profession}
+        onChange={handleChange}
+      />
+
       <button
         className="btn btn-primary w-100 mx-auto"
         disabled={Object.keys(errors).length}
