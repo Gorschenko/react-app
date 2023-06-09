@@ -1,5 +1,6 @@
 import TextField from "components/base/textField";
 import SelectField from "components/base/selectField";
+import RadioField from "components/base/radioField";
 import { useState, useEffect } from "react";
 import { validator } from "utils/validator";
 import api from "../api";
@@ -17,6 +18,7 @@ const RegisterForm = () => {
     email: "",
     password: "",
     profession: "",
+    sex: "male",
   });
 
   const [errors, setErrors] = useState({});
@@ -96,6 +98,15 @@ const RegisterForm = () => {
         value={data.profession}
         options={professions}
         error={errors.profession}
+        onChange={handleChange}
+      />
+      <RadioField
+        options={[
+          { name: "Male", value: "male" },
+          { name: "Female", value: "female" },
+        ]}
+        value={data.sex}
+        name="sex"
         onChange={handleChange}
       />
 
