@@ -9,6 +9,7 @@ const SelectField = ({
   const getInputClasses = () => {
     return "form-select is-" + (error ? "invalid" : "valid");
   };
+
   const optionsArray =
     !Array.isArray(options) && typeof options === "object"
       ? Object.keys(options).map((optionName) => ({
@@ -16,6 +17,10 @@ const SelectField = ({
           value: options[optionName]._id,
         }))
       : [];
+
+  const handleChange = ({ target }) => {
+    onChange({ name: target.name, value: target.value });
+  };
 
   return (
     <div className="mb-4">
@@ -28,7 +33,7 @@ const SelectField = ({
         required
         name="profession"
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
       >
         <option disabled value="">
           {defaultOption}

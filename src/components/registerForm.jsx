@@ -1,17 +1,21 @@
 import TextField from "components/base/textField";
 import SelectField from "components/base/selectField";
 import RadioField from "components/base/radioField";
+import MyltiField from "components/base/myltiField";
+
 import { useState, useEffect } from "react";
 import { validator } from "utils/validator";
 import api from "../api";
 
 const RegisterForm = () => {
   const [professions, setProfession] = useState();
+  const [qualities, setQualities] = useState({});
 
   useEffect(() => {
     api.professions
       .fetchAll()
       .then((professions) => setProfession(professions));
+    api.qualities.fetchAll().then((qualities) => setQualities(qualities));
   }, []);
 
   const [data, setData] = useState({
@@ -19,11 +23,12 @@ const RegisterForm = () => {
     password: "",
     profession: "",
     sex: "male",
+    qualities: [],
   });
 
   const [errors, setErrors] = useState({});
 
-  const handleChange = ({ target }) => {
+  const handleChange = (target) => {
     setData((prevState) => ({
       ...prevState,
       [target.name]: target.value,
@@ -107,7 +112,14 @@ const RegisterForm = () => {
         ]}
         value={data.sex}
         name="sex"
+        label="Выберите пол"
         onChange={handleChange}
+      />
+      <MyltiField
+        label="Выберите качества"
+        options={qualities}
+        onChange={handleChange}
+        name="qualities"
       />
 
       <button
