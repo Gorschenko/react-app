@@ -1,7 +1,8 @@
 import TextField from "components/base/textField";
 import CheckboxField from "components/base/checkboxField";
 import { useState, useEffect } from "react";
-import { validator } from "utils/validator";
+// import { validator } from "utils/validator";
+import * as yup from "yup";
 
 const LoginForm = () => {
   const [data, setData] = useState({
@@ -11,7 +12,18 @@ const LoginForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-
+  const validateSchema = yup.object().shape({
+    password: yup
+      .string()
+      .required("Поле необходимо заполнить")
+      .matches(/^(?=.*[A-Z])/, "Должна быть одна заглавная бука")
+      .matches(/^(?=.*[1-9])/, "Должна быть одна цифра")
+      .matches(/(?=.{8,})/, "Минимум 8 символов"),
+    email: yup
+      .string()
+      .required("Поле должно быть email")
+      .email("Поле должно быть email"),
+  });
   const handleChange = (target) => {
     setData((prevState) => ({
       ...prevState,
@@ -19,38 +31,41 @@ const LoginForm = () => {
     }));
   };
 
-  const validatorConfig = {
-    email: {
-      isRequired: { message: "Поле необходимо заполнить" },
-      isEmail: {
-        message: "Поле должно быть email",
-      },
-    },
-    password: {
-      isRequired: { message: "Поле необходимо заполнить" },
-      isCapitalSymbol: {
-        message: "Должна быть одна заглавная бука",
-      },
-      isContainDigit: {
-        message: "Должна быть одна цифра",
-      },
-      min: {
-        message: "Минимум 8 символов",
-        value: 8,
-      },
-    },
-    licence: {
-      isRequired: { message: "Поле необходимо заполнить" },
-    },
-  };
+  // const validatorConfig = {
+  //   email: {
+  //     isRequired: { message: "Поле необходимо заполнить" },
+  //     isEmail: {
+  //       message: "Поле должно быть email",
+  //     },
+  //   },
+  //   password: {
+  //     isRequired: { message: "Поле необходимо заполнить" },
+  //     isCapitalSymbol: {
+  //       message: "Должна быть одна заглавная бука",
+  //     },
+  //     isContainDigit: {
+  //       message: "Должна быть одна цифра",
+  //     },
+  //     min: {
+  //       message: "Минимум 8 символов",
+  //       value: 8,
+  //     },
+  //   },
+  //   licence: {
+  //     isRequired: { message: "Поле необходимо заполнить" },
+  //   },
+  // };
 
   useEffect(() => {
     validate();
   }, [data]);
 
   const validate = () => {
-    const errors = validator(data, validatorConfig);
-    setErrors(errors);
+    // const errors = validator(data, validatorConfig);
+    validateSchema
+      .validate(data)
+      .then(() => setErrors({}))
+      .catch((err) => setErrors({ [err.path]: err.message }));
     return Object.keys(errors).length === 0;
   };
 

@@ -3,7 +3,7 @@ import { useState } from "react";
 const TextField = ({ label, type, name, onChange, value, error }) => {
   const [showPassword, setShowPassword] = useState();
   const getInputClasses = () => {
-    return "form-control is-" + (error ? "invalid" : "valid");
+    return "form-control " + (error ? "is-invalid" : "");
   };
 
   const toggleShowPassword = () => setShowPassword((prevState) => !prevState);
