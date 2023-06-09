@@ -26,12 +26,6 @@ const Users = () => {
   }, []);
 
   useEffect(() => {
-    api.professions
-      .fetchAll()
-      .then((professions) => setProfession(professions));
-  }, []);
-
-  useEffect(() => {
     setCurrentPage(1);
   }, [selectedProf, searchQuery]);
 

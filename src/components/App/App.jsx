@@ -19,7 +19,7 @@ const App = () => {
         <Route path="/" exact component={Home} />
         <Route path="/custom-redux" component={CustomReduxPage} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/login" component={Login} />
+        <Route path="/login/:type?" component={Login} />
         <Route
           path="/posts/:postId?"
           render={(props) => <Posts {...props} />}
