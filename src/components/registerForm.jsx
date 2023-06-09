@@ -2,6 +2,7 @@ import TextField from "components/base/textField";
 import SelectField from "components/base/selectField";
 import RadioField from "components/base/radioField";
 import MyltiField from "components/base/myltiField";
+import CheckboxField from "components/base/checkboxField";
 
 import { useState, useEffect } from "react";
 import { validator } from "utils/validator";
@@ -24,6 +25,7 @@ const RegisterForm = () => {
     profession: "",
     sex: "male",
     qualities: [],
+    licence: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -56,6 +58,9 @@ const RegisterForm = () => {
       },
     },
     profession: {
+      isRequired: { message: "Поле необходимо заполнить" },
+    },
+    licence: {
       isRequired: { message: "Поле необходимо заполнить" },
     },
   };
@@ -121,6 +126,14 @@ const RegisterForm = () => {
         onChange={handleChange}
         name="qualities"
       />
+      <CheckboxField
+        value={data.licence}
+        onChange={handleChange}
+        name="licence"
+        error={errors.licence}
+      >
+        Подтвердить соглашение
+      </CheckboxField>
 
       <button
         className="btn btn-primary w-100 mx-auto"

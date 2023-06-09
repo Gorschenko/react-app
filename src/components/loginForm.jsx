@@ -1,4 +1,5 @@
 import TextField from "components/base/textField";
+import CheckboxField from "components/base/checkboxField";
 import { useState, useEffect } from "react";
 import { validator } from "utils/validator";
 
@@ -6,6 +7,7 @@ const LoginForm = () => {
   const [data, setData] = useState({
     email: "",
     password: "",
+    licence: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -36,6 +38,9 @@ const LoginForm = () => {
         message: "Минимум 8 символов",
         value: 8,
       },
+    },
+    licence: {
+      isRequired: { message: "Поле необходимо заполнить" },
     },
   };
 
@@ -74,6 +79,14 @@ const LoginForm = () => {
         error={errors.password}
         onChange={handleChange}
       />
+      <CheckboxField
+        value={data.licence}
+        onChange={handleChange}
+        name="licence"
+        error={errors.licence}
+      >
+        Подтвердить соглашение
+      </CheckboxField>
       <button
         className="btn btn-primary w-100 mx-auto"
         disabled={Object.keys(errors).length}
