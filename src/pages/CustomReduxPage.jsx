@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { taskCompleted, taskDeleted, titleChanged } from "store/task";
+import { taskDeleted, titleChanged, completeTask } from "store/task";
 import configureStore from "store/store";
 
 
@@ -14,10 +14,6 @@ const CustomReduxPage = () => {
       setState(store.getState());
     });
   }, []);
-
-  const completeTask = (taskId) => {
-    store.dispatch(taskCompleted(taskId));
-  };
 
   const changeTitle = (taskId) => {
     store.dispatch(titleChanged(taskId));
@@ -38,7 +34,7 @@ const CustomReduxPage = () => {
             <p>{`Completed: ${el.completed}`}</p>
             <button
               className="btn btn-primary m-1"
-              onClick={() => completeTask(el.id)}
+              onClick={() => store.dispatch(completeTask(el.id))}
             >
               Complete
             </button>
