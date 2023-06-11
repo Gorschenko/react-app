@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { taskDeleted, titleChanged, completeTask } from "store/task";
+import { taskDeleted, titleChanged, completeTask, getTask } from "store/task";
 import configureStore from "store/store";
 
 
@@ -10,6 +10,7 @@ const CustomReduxPage = () => {
   console.log(state);
 
   useEffect(() => {
+    store.dispatch(getTask())
     store.subscribe(() => {
       setState(store.getState());
     });
