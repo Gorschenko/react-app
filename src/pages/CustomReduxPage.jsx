@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
-import { createStore } from "store/createStore";
-import { taskReducer } from "store/taskReducer";
-import * as actions from "../store/actionTypes";
+import * as actions from "../store/actions";
+import { initiateStore } from "store/store";
 
-const initialState = [
-  { id: 1, title: "Task 1", completed: false },
-  { id: 2, title: "Task 2", completed: false },
-];
 
-const store = createStore(taskReducer, initialState);
+const store = initiateStore()
 
 const CustomReduxPage = () => {
   const [state, setState] = useState(store.getState());
@@ -21,18 +16,16 @@ const CustomReduxPage = () => {
   }, []);
 
   const completeTask = (taskId) => {
-    store.dispatch({
-      type: actions.taskUpdated,
-      payload: { id: taskId, completed: true },
-    });
+    store.dispatch(actions.taskCompleted(taskId));
   };
 
   const changeTitle = (taskId) => {
-    store.dispatch({
-      type: actions.taskUpdated,
-      payload: { id: taskId, title: `New title for ${taskId}` },
-    });
+    store.dispatch(actions.titleChanged(taskId));
   };
+
+  const deleteTask = (taskId) => {
+    store.dispatch(actions.taskDeleted(taskId))
+  }
 
   return (
     <>
@@ -44,7 +37,7 @@ const CustomReduxPage = () => {
             <p>{el.title}</p>
             <p>{`Completed: ${el.completed}`}</p>
             <button
-              className="btn btn-primary m-2"
+              className="btn btn-primary m-1"
               onClick={() => completeTask(el.id)}
             >
               Complete
@@ -54,6 +47,12 @@ const CustomReduxPage = () => {
               onClick={() => changeTitle(el.id)}
             >
               Change title
+            </button>
+            <button
+              className="btn btn-danger m-1"
+              onClick={() => deleteTask(el.id)}
+            >
+              Delete task
             </button>
             <hr />
           </li>

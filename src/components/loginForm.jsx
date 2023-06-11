@@ -24,6 +24,7 @@ const LoginForm = () => {
       .required("Поле должно быть email")
       .email("Поле должно быть email"),
   });
+
   const handleChange = (target) => {
     setData((prevState) => ({
       ...prevState,

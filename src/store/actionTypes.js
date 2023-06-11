@@ -1,3 +1,4 @@
 const taskUpdated = "task/updated";
+const taskDeleted = "task/deleted";
 
-export { taskUpdated };
+export { taskUpdated, taskDeleted };
