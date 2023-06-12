@@ -33,7 +33,7 @@ const taskSlice = createSlice({ name: 'task', initialState, reducers: {
 const { actions, reducer: taskReducer } = taskSlice
 const { update, remove, recived, taskRequested, taskRequestFailed } = actions
 
-export const getTask = () => async (dispatch, getState) => {
+export const loadTasks = () => async (dispatch, getState) => {
   try {
     dispatch(taskRequested());
     const data = await todosService.fetch();
@@ -56,6 +56,9 @@ export const completeTask = (id) => (dispatch, getState) => {
  export function taskDeleted(id) {
   return remove({ id })
  }
+
+ export const getTasks = () => (state) => state.tasks.entities;
+ export const getTasksLoadingStatus = () => (state) => state.tasks.isLoading;
 
  
  export  default taskReducer;

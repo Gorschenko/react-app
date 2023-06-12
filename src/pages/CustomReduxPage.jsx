@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { taskDeleted, titleChanged, completeTask, getTask } from "store/task";
+import { getError } from "store/error";
+import { taskDeleted, titleChanged, completeTask, getTasks, loadTasks, getTasksLoadingStatus } from "store/task";
 
 const CustomReduxPage = () => {
-  const state = useSelector((state) => state.tasks.entities);
-  const isLoading = useSelector((state) => state.tasks.isLoading);
-  const error = useSelector(state => state.errors.entities[0]);
+  const state = useSelector(getTasks());
+  const isLoading = useSelector(getTasksLoadingStatus());
+  const error = useSelector(getError());
   const dispatch = useDispatch();
   console.log(state);
 
   useEffect(() => {
-    dispatch(getTask())
+    dispatch(loadTasks())
   }, []);
 
   const changeTitle = (taskId) => {
