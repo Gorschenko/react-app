@@ -9,6 +9,15 @@ const todosService = {
             },
         });
         return data;
+    },
+    create: async () => {
+        const { data } = await httpService.post(todosEndpoint, {
+            body: {
+                title: 'My custom title',
+                completed: false,
+            },
+        });
+        return data;
     }
 };
 

@@ -1,7 +1,15 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getError } from "store/error";
-import { taskDeleted, titleChanged, completeTask, getTasks, loadTasks, getTasksLoadingStatus } from "store/task";
+import {
+  taskDeleted,
+  titleChanged,
+  completeTask,
+  getTasks,
+  loadTasks,
+  getTasksLoadingStatus,
+  createTask,
+} from "store/task";
 
 const CustomReduxPage = () => {
   const state = useSelector(getTasks());
@@ -33,7 +41,12 @@ const CustomReduxPage = () => {
   return (
     <>
       <h1>Redux</h1>
-
+      <button
+        className="btn btn-primary m-2"
+        onClick={() => dispatch(createTask())}
+      >
+        Create new task
+      </button>
       <ul>
         {state.map((el) => (
           <li key={el.id}>
