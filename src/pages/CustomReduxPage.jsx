@@ -1,27 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { taskDeleted, titleChanged, completeTask, getTask } from "store/task";
-import configureStore from "store/store";
-
-
-const store = configureStore()
 
 const CustomReduxPage = () => {
-  const [state, setState] = useState(store.getState());
+  const state = useSelector((state) => state.entities);
+  const isLoading = useSelector((state) => state.isLoading);
+  const error = useSelector(state => state.error);
+  const dispatch = useDispatch();
   console.log(state);
 
   useEffect(() => {
-    store.dispatch(getTask())
-    store.subscribe(() => {
-      setState(store.getState());
-    });
+    dispatch(getTask())
   }, []);
 
   const changeTitle = (taskId) => {
-    store.dispatch(titleChanged(taskId));
+    dispatch(titleChanged(taskId));
   };
 
   const deleteTask = (taskId) => {
-    store.dispatch(taskDeleted(taskId))
+    dispatch(taskDeleted(taskId))
+  }
+
+  if (isLoading) {
+    return <h1>Loading</h1>
+  }
+  
+  if (error) {
+    return <p>{error}</p>
   }
 
   return (
@@ -35,7 +40,7 @@ const CustomReduxPage = () => {
             <p>{`Completed: ${el.completed}`}</p>
             <button
               className="btn btn-primary m-1"
-              onClick={() => store.dispatch(completeTask(el.id))}
+              onClick={() => dispatch(completeTask(el.id))}
             >
               Complete
             </button>
